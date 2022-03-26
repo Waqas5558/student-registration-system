@@ -1,0 +1,111 @@
+<div id="modal">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Student</h4>
+        <button type="button" class="btn btn-outline-dark" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div id="basicInformation">
+            <form [formGroup]="studentForm">
+                <div class="form-group">
+                <h4>Basic Information</h4>
+                  <div class="input-group">
+                    <input formControlName="id" class="form-control" type="hidden">
+                  </div>
+                  <label for="firstname">First Name</label>
+                  <div class="input-group">
+                    <input formControlName="firstName" class="form-control" type="text">
+                  </div>
+        
+                  <label for="lastName">Last Name</label>
+                  <div class="input-group">
+                    <input formControlName="lastName" class="form-control" type="text">
+                  </div>
+        
+                  <label for="dateOfBirth">Date Of Birth</label>
+                  <div class="input-group">
+                    <input formControlName="dateOfBirth" class="form-control" type="date">
+                  </div>
+                </div>
+              </form>
+          </div>
+          <div id="familyInformation" *ngIf="isStudentSubmitted">
+            <h4>Family Information</h4>
+            <div class="container">
+                <button type="submit" class="btn btn-primary" (click)="submitFamilyMember()">
+                  Add Family Member
+                </button>
+                &nbsp;
+                <button type="submit" class="btn btn-primary" (click)="submitFamilyMember(true)">
+                    Update Family Member
+                  </button>
+                <br/>
+    
+            <form [formGroup]="familyMemberForm" id="familyMemberForm">
+                <div class="form-group">
+                  <div class="input-group">
+                    <input formControlName="id" class="form-control" type="hidden">
+                  </div>
+                  <label for="firstName">Firstname</label>
+                  <div class="input-group">
+                    <input formControlName="firstName" class="form-control" type="text">
+                  </div>
+        
+                  <label for="lastName">Last Name</label>
+                  <div class="input-group">
+                    <input formControlName="lastName" class="form-control" type="text">
+                  </div>
+        
+                  <label for="dateOfBirth">Date Of Birth</label>
+                  <div class="input-group">
+                    <input formControlName="dateOfBirth" class="form-control" type="date">
+                  </div>
+    
+                  <label for="relationship">Relationship</label>
+                  <select formControlName="relationship" class="form-control form-select">
+                    <option value="Parent">Parent</option>
+                    <option value="Sibling">Sibling</option>
+                    <option value="Spouse">Spouse</option>
+                </select>
+                </div>
+            </form>
+    
+                <div id="family-member-list">
+                  <table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Sr No</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Date of Birth</th>
+                        <th scope="col">Relationship</th>
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let member of familyMembers; index as i">
+                        <td>{{i + 1}}</td>
+                        <td>{{member.ID}}</td>
+                        <td>{{member.firstName}}</td>
+                        <td>{{member.lastName}}</td>
+                        <td>{{member.dateOfBirth | date}}</td>
+                        <td>{{member.relationship}}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary">Edit</button>
+                            &nbsp;
+                            <button type="button" class="btn btn-primary" (click)="deleteFamilyMember(member.ID)">Delete</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                </div>             
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button (click)="clear()" class="btn btn-outline-dark w-100">Clear </button>
+        <button type="submit" class="btn btn-primary w-100" (click)="submit()">Submit/Update Student</button>
+      </div>
+</div>

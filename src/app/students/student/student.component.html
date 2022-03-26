@@ -1,0 +1,56 @@
+<div class="container">
+
+  <!-- <div ngbDropdown class="d-inline-block">
+    <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>User Role</button>
+    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+      <button ngbDropdownItem (click)="ChangeSortOrder('Admin')">Admin</button>
+      <button ngbDropdownItem (click)="ChangeSortOrder('Registrar')">Registrar</button>
+    </div>
+  </div> -->
+
+  <div class="input-group">
+    <button type="button" class="btn btn-primary" (click)="openModal(null)" >
+      Add New Student
+    </button>
+    &nbsp;
+    <select class="form-control form-select" width="100px" id="inputGroupSelect04" aria-label="Example select with button addon" (change)="onChange($event)">
+      <option value="Admin" selected>Admin</option>
+      <option value="Registrar">Registrar</option>
+    </select>
+  </div>
+
+  
+  <!-- <div ngbDropdown class="d-inline-block">
+    <button class="btn btn-outline-primary" id="sortMenu" ngbDropdownToggle>Registrar</button>
+    <div class="dropdown-menu" aria-labelledby="sortMenu">
+      <button class="dropdown-item" (click)="ChangeSortOrder('a')" >Registrar</button>
+      <button class="dropdown-item" (click)="ChangeSortOrder('a')" >Admin</button>
+    </div>
+  </div> -->
+  <div id="student-list">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Sr No</th>
+          <th scope="col">ID</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Date of Birth</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of students; index as i" (click)="openModal(i)">
+          <td>{{i + 1}}</td>
+          <td>{{student.ID}}</td>
+          <td>{{student.firstName}}</td>
+          <td>{{student.lastName}}</td>
+          <td>{{student.dateOfBirth | date}}</td>
+          <td><button type="button" class="btn btn-primary">View</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+
+
