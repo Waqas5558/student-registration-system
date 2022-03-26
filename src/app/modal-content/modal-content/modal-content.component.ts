@@ -3,7 +3,6 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { formatDate } from '@angular/common';
 import { StudentService } from 'src/services/student.service';
-import { AppRoutingModule } from 'src/app/app-routing.module';
 import {​​​​​​Router}​​​​​​ from '@angular/router';
 
 
@@ -18,6 +17,7 @@ export class ModalContentComponent implements OnInit {
   @Input() public student: any;
   updateStudents: any;
   familyMembers: any;
+  familyMember: any;
   studentForm: FormGroup;
   familyMemberForm: FormGroup;
   isStudentSubmitted: boolean = false;
@@ -42,8 +42,6 @@ export class ModalContentComponent implements OnInit {
    }
 
   ngOnInit() {
-    debugger;
-
     if(this.student === null)
     {
       this.studentForm = new FormGroup({
@@ -73,9 +71,8 @@ export class ModalContentComponent implements OnInit {
 
         if(!this.studentService.isRegistrarSelected)
         {
-          debugger;
           this.studentForm.disable();
-          this.familyMemberForm.disable();
+          //this.familyMemberForm.disable();
         }
     }
     
@@ -107,7 +104,6 @@ export class ModalContentComponent implements OnInit {
 
   submitFamilyMember(isUpdate: boolean = false)
   {
-    debugger;
     if(isUpdate)
     {
       this.studentService.updateFamilyMember(this.familyMemberForm.value);  
@@ -119,11 +115,22 @@ export class ModalContentComponent implements OnInit {
     this.ngOnInit();
   }
 
+  fillEditFamilyMember(familyMemberIndex: number)
+  {
+    this.familyMember = this.familyMembers[familyMemberIndex];
+    this.familyMemberForm = new FormGroup({
+      id: new FormControl(this.familyMember.ID),
+      firstName: new FormControl(this.familyMember.firstName),
+      lastName: new FormControl(this.familyMember.lastName),
+      dateOfBirth: new FormControl(formatDate(this.familyMember.dateOfBirth, 'yyyy-MM-dd', 'en')),
+      relationship: new FormControl(this.familyMember.relationship),
+    });
+  }
+
   deleteFamilyMember(familyMemberId:number)
   {
-    debugger;
     this.studentService.deleteFamilyMember(familyMemberId)
-     this.ngOnInit();
+    this.ngOnInit();
   }
 
 }

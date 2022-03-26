@@ -47,10 +47,13 @@ students: any;
   }
 
    onChange(event: any){
-     debugger;
      if(event.target.value == 'Registrar')
      {
        this.studentService.isRegistrarSelected = true;
+     }
+     else
+     {
+      this.studentService.isRegistrarSelected = false;
      }
    }
 }

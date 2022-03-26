@@ -24,10 +24,8 @@ export class StudentService {
   }
 
   addStudent(student: any) {
-    debugger;
     return this.http.post(this.url + "/api/Students", student).subscribe({
       next: data => {
-        debugger;
           console.info("Data has been added", data)
       },
       error: error => {
@@ -94,5 +92,16 @@ export class StudentService {
           console.error('There was an error!', error);
       }
     })
+  }
+
+  getNationalities() {
+    return this.http.get(this.url + "/api/Nationalities/").
+      pipe(
+        map((data: any) => {
+          return data;
+        }), catchError( error => {
+          return error( 'Something went wrong!' );
+        })
+     )
   }
 }

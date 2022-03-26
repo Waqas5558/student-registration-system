@@ -93,7 +93,7 @@
                         <td>{{member.dateOfBirth | date}}</td>
                         <td>{{member.relationship}}</td>
                         <td>
-                            <button type="button" class="btn btn-primary">Edit</button>
+                            <button type="button" class="btn btn-primary" (click)="fillEditFamilyMember(i)">Edit</button>
                             &nbsp;
                             <button type="button" class="btn btn-primary" (click)="deleteFamilyMember(member.ID)">Delete</button>
                         </td>
